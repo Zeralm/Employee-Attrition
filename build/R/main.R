@@ -36,19 +36,12 @@ graph2.1 <- data[data$event == "Stayed",] %>% group_by(age) %>% summarize(mean(s
   ggplot(mapping = aes(x = age, y = avg_stag)) + geom_col(fill = "Grey")  +  
   labs(title = "Average experience, people who stayed", x = "Age", y = "Experience") + 
   theme(plot.title = element_text(hjust = 0.5))
-  # + facet_grid(event~.)
+
 graph2.2 <- data[data$event == "Quit",] %>% group_by(age) %>% summarize(mean(stag)) %>% 
   rename(avg_stag = `mean(stag)`) %>% 
   ggplot(mapping = aes(x = age, y = avg_stag)) + geom_col(fill = "Grey")  +  
   labs(title = "Average experience, people who left", x = "Age", y = "Experience") + 
   theme(plot.title = element_text(hjust = 0.5))
-# + facet_grid(event~.)
-
-
-# For some strange reason, we have that the youngest people have unreasonably high 
-# experience, and the oldest showcase the opposite (checked and double checked). 
-# This is incoherent.
-
 
 graph3 <- melt(data %>% select(event,(extraversion:novator))) %>% 
   ggplot(mapping = aes(x = variable, y = value, fill = event)) + 
@@ -183,7 +176,7 @@ aa_fit = aareg(Surv(stag, event) ~ 1 +  gender + age +
                   greywage + way + extraversion + independ + selfcontrol + 
                   anxiety + novator + coach + head_gender, data = newdat)
 
-autoplot(aa_fit) + labs(title = "Effect of covariates on hazard over time")
+autoplot(aa_fit) + labs(title = "Coeficients on hazard over time")
 
 
 # Aalen model
@@ -195,8 +188,8 @@ autoplot(aa_fit) + labs(title = "Effect of covariates on hazard over time")
 
 # Recommendation: hire in surroundings, offer help in accommodation
 # People with longer tenure and age are at risk. Maybe senior promotion is not
-# encouraged, or salary for more senior roles is not competitive, so people 
-# with more experience are more prone to leave. 
+# encouraged, or salary for more senior roles is not competitive, so people
+# with more experience are more prone to leave.
 # Look for signals of conscientiousness when hiring (psychometric tests are likely to
 # be tricked in conscientiousness)
 
