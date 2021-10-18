@@ -217,9 +217,7 @@ This model doesn't assume assume coefficients are stable
 
 
 
-# References:
-# Cox DR. A note on the graphical analysis of survival data. Biometrika. 1979;66:188–190
-# Kaplan EL, Meier P. Nonparametric estimation from incomplete observations. J Am Stat Assoc. 1958;53:457–481
+
 aa_fit = aareg(Surv(stag, event) ~ 1 +  gender + age + 
                   greywage + way + extraversion + independ + selfcontrol + 
                   anxiety + novator + coach + head_gender, data = newdat)
@@ -237,4 +235,10 @@ Age is a predictor of quitting on longer tenures.
 Practical recommendation: hire in surroundings, offer help in accommodation.  
 People with longer tenure and age are at risk. Maybe senior promotion is not encouraged, or salary for more senior roles is not competitive, so people with more experience are more prone to leave when they acquire seniority.  
 Look for weak signals of conscientiousness when hiring (psychometric tests are likely to be tricked to favor conscientiousness).
+
+# References:
+
+Cox DR. A note on the graphical analysis of survival data. Biometrika. 1979;66:188–190  
+
+Kaplan EL, Meier P. Nonparametric estimation from incomplete observations. J Am Stat Assoc. 1958;53:457–481
 
