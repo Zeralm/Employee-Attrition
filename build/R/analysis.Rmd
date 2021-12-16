@@ -152,15 +152,15 @@ data.frame(testnames,pvalues, significant_at_0.05)
 
 # Survival analysis
 
-Why survival analysis, instead of logistic regression? 
+Why use survival analysis, instead of logistic methods? 
 
-- The coefficients on tenure would not be useful. This variable is mismanaged in logistic regressions: we don't want to predict the turnover of current employees. We want to predict the turnover of future employees, so current tenure is irrelevant and unactionable.  
+- Logistic methods are classification models, that is, they assume that there are two categories of employees: those who stay and those
+who leave. This is not only wrong (all employees are expected to leave eventually), but inaccurate even when imposing time thresholds. Let's say we want to predict the likelihood of turnover at a one-year threshold, using a logistic regression. Our results could possibly indicate that there are some super-employees that have a very high likelihood to stay for one year. However, our model would fail to ascertain whether or not these super employees would quit at dramatic rates after 1.5 years, and therefore would not be helpful for many problems. However, if said thresholds were considered of strategic importance (for example, a 3-month threshold), the use of logistic methods could be justified when taking into account the following point.
 
-- Survival analysis allows you to be precise and detect breakpoints and trends.  
+- Results achieved with a logistic regression indicate that current tenure is the most important predictor of turnover. This is not an actionable insight, since hiring decisions cannot depend on this variable. The only way to surpass this limitation while staying close to the realm of logistic methods would imply the use of a time series model with an auto correlated quitting-likelihood variable, which is roughly equivalent to Survival Analysis. One circumstance in which this requirement can be dodged is a short-term time frame, (i.e 3 months), since the autocorrelation is deemed to be insignificant. In the rest of cases, Survival Analysis gets the most out of the predictive power of tenure.
 
-- If you actually want to find breakpoints or changes in slope (splines), you should probably plot the dataset like a distribution of tenure-survival. That would already resemble survival analysis, but in a much less precise way.  
-
-- It will be more accurate answering our practical questions on turnover. 
+- Survival analysis allows you to be precise and detect meaningful breakpoints and trends, and readily present them to a non technical audience.  
+- If you actually want to find breakpoints or changes in slope (splines), you should probably plot the dataset like a distribution of tenure-survival. That would already resemble survival analysis in a graphical way. This is because it is much more intuitive to understand (and model) breakpoints this way.
 
 ```{r warning = FALSE}
 
@@ -229,12 +229,12 @@ autoplot(aa_fit) + labs(title = "Coeficients on hazard over time")
 Some hazard effects clearly vary over time (a(t) - XB(t)), so the cox implementation should be taken with a grain of salt.  
 Grey wage is a predictor of quitting, and going to work by foot is a negative predictor of quitting.  
 Age is a predictor of quitting on longer tenures.
- Higher conscientiousness is associated to lower turnover in the first years.   
+Higher conscientiousness is associated to lower turnover in the first years.   
 
 
 Practical recommendation: hire in surroundings, offer help in accommodation.  
 People with longer tenure and age are at risk. Maybe senior promotion is not encouraged, or salary for more senior roles is not competitive, so people with more experience are more prone to leave when they acquire seniority.  
-Look for weak signals of conscientiousness when hiring (psychometric tests are likely to be tricked to favor conscientiousness).
+Look for weak signals of conscientiousness when hiring (naturally, one cannot rely on psychometric tests since they are likely to be tricked to favor conscientiousness).
 
 # References:
 
