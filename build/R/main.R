@@ -129,16 +129,7 @@ significant_at_0.5 = pvalues < 0.05
 
 data.frame(testnames,pvalues, significant_at_0.5)
 
-# - Survival analysis
 
-# Why survival analysis and not logistic regression:
-# - The coefficients on tenure are not useful. The variable is mismanaged. 
-# We don't want to predict turnover of current employees, therefore current tenure is irrelevant.
-# - Survival analysis allows you to be precise and detect breakpoints and trends
-# - If you actually want to test for breakpoints or changes in slope (splines), 
-# you should probably plot the dataset like a distribution of tenure-survival. 
-# That is almost survival analysis already.
-# - It will be more accurate answering our questions on turnover. 
 
 newdat <- read_csv("data/turnover-data-set_utf.csv", show_col_types = FALSE, 
                  col_types = "dififffffffddddd") 
